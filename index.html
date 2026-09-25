@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <!-- WICHTIG: UTF-8 muss als erstes Meta-Tag stehen! -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress-Test</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <!-- Chart.js für Diagramme -->
+    <script src="chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Überschrift -->
+        <h1>Stress-Test</h1>
+
+        <!-- Gesamtpunktzahl (rechtsbündig) -->
+        <div id="total-score">Gesamt: <span id="score">0</span></div>
+
+        <!-- Formular für die Fragen -->
+        <form id="stress-form">
+            <!-- Fragen werden dynamisch per JavaScript eingefügt -->
+        </form>
+
+        <!-- Ergebnis-Anzeige -->
+        <div id="result" class="result-box">
+            Dein Stresslevel: <span id="stress-level">Noch kein Ergebnis</span>
+        </div>
+
+        <!-- Button zum Speichern des Ergebnisses -->
+        <button id="save-result" class="action-button">Ergebnis speichern</button>
+
+        <!-- Button zum Exportieren der Daten -->
+        <button id="export-data" class="action-button">Daten exportieren (CSV)</button>
+
+        <!-- Button zum Löschen der Daten -->
+        <button id="clear-data" class="action-button" style="background-color: #dc3545;">Daten löschen</button>
+
+        <!-- Diagramm-Container für den Trend -->
+        <div class="chart-container">
+            <canvas id="stressChart"></canvas>
+        </div>
+
+        <!-- Historische Ergebnisse als Tabelle -->
+        <div class="history-container">
+            <h2>Deine letzten Ergebnisse (letzte 6 Monate)</h2>
+            <table id="history-table">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Punkte</th>
+                        <th>Stresslevel</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body">
+                    <!-- Ergebnisse werden hier dynamisch eingefügt -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Service Worker registrieren (für Offline-Funktionalität) -->
+    <script>
+        // Service Worker registrieren, sobald die Seite geladen ist
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registriert: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker-Registrierung fehlgeschlagen: ', err);
+                    });
+            });
+        }
+    </script>
+
+    <!-- Haupt-Logik (script.js) -->
+    <script src="script.js"></script>
+</body>
+</html>

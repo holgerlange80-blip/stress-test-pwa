@@ -1,12 +1,12 @@
-const CACHE_NAME = 'stress-test-v2'; // Version erhöht!
+const CACHE_NAME = 'stress-test-v3'; // Version erhÃ¶ht!
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/script.js',
-    '/manifest.json',
-    '/icon-512x512.png',
-    '/chart.js' 
+    './',
+    './index.html',
+    './style.css',
+    './script.js',
+    './manifest.json',
+    './icon-512x512.png',
+    './chart.js' 
 ];
 
 // ... (restlicher Code bleibt gleich)
@@ -22,12 +22,12 @@ self.addEventListener('install', event => {
     );
 });
 
-// Ressourcen aus dem Cache liefern (Offline-Unterstützung)
+// Ressourcen aus dem Cache liefern (Offline-UnterstÃ¼tzung)
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                // Falls im Cache, zurückgeben
+                // Falls im Cache, zurÃ¼ckgeben
                 if (response) {
                     return response;
                 }
@@ -49,7 +49,7 @@ self.addEventListener('fetch', event => {
     );
 });
 
-// Alte Caches löschen
+// Alte Caches lÃ¶schen
 self.addEventListener('activate', event => {
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
